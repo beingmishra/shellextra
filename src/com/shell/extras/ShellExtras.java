@@ -22,6 +22,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.ActivityNotFoundException;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -33,6 +34,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -53,6 +55,8 @@ public class ShellExtras extends SettingsPreferenceFragment {
     MenuItem menuitem;
 
     PagerAdapter mPagerAdapter;
+    
+    private Toast mTapToast;
 
     public static final String ABOUT_PACKAGE_NAME = "com.pearl.about";
     public static Intent INTENT_ABOUT = new Intent(Intent.ACTION_MAIN)
@@ -179,7 +183,15 @@ public class ShellExtras extends SettingsPreferenceFragment {
         switch (item.getItemId()) {
             case 0:
                 if (INTENT_ABOUT != null) {
-                    startActivity(INTENT_ABOUT);
+                    try {
+                        
+                        startActivity(INTENT_ABOUT);
+                        
+                    } catch (ActivityNotFoundException activityNotFound) {
+                        mTapToast = Toast.makeText(getContext(),"Aww it seems like you dont have the app installed",Toast.LENGTH_LONG);
+                        mTapToast.show();
+
+                    }
                 }
                 return true;
             default:
