@@ -22,4 +22,9 @@
             android:icon="@drawable/ic_buttons"
             android:title="@string/buttons_title" />
 
+        <Preference
+            android:key="edge_gestures"
+            android:title="@string/edge_gestures_title"
+            android:summary="@string/edge_gestures_summary"
+            android:fragment="com.shell.extras.fragments.EdgeGesturesSettings" />
 </PreferenceScreen>
